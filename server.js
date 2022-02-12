@@ -53,7 +53,7 @@ app.get('/' , (req, res) => {
 });
 
 app.get('/books/new', (req,res) => {
-  res.send('new')
+  res.render('new.ejs')
 })
 
 
