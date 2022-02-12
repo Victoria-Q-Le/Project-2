@@ -52,6 +52,10 @@ app.get('/' , (req, res) => {
   res.send('Hello World!');
 });
 
+app.get('/books/new', (req,res) => {
+  res.send('new')
+})
+
 
 
 //___________________
