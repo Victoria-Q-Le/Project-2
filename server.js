@@ -52,10 +52,21 @@ app.get('/' , (req, res) => {
   res.send('Hello World!');
 });
 
+
+
+//___________________
+// New Route
+//___________________
 app.get('/books/new', (req,res) => {
   res.render('new.ejs')
 })
 
+//___________________
+// Create Route
+//___________________
+app.post('/books/',(req,res) => {
+  res.send('req.body')
+})
 
 
 //___________________
