@@ -104,6 +104,31 @@ app.delete('/fruits/:id',(req,res) => {
     res.redirect('/books')
   })
 })
+
+//___________________
+// Edit Route
+//___________________
+app.get('/book/:id/edit', (req,res) => {
+  Book.findById(req.params.id, (err,foundBook) => {
+    res.render('edit.ejs', {
+      book: foundBook
+    })
+  })
+})
+
+//___________________
+// Put Route
+//___________________
+app.put('/book/:id',(req,res) => {
+  if (req.body.finished === 'on'){
+    req.body.finished === true
+  } else {
+    req.body.finished === false
+  }
+  Book.findByIdAndUpdate (req.params.id, req.body, {new:true}, (err,updateModel) => {
+    res.redirect('/books')
+  })
+})
 //___________________
 //Listener
 //___________________

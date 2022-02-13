@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+    <h1>Edit Book Page</h1>
+    <form action="/books/<%=book.id%>?_method=PUT" method = "POST">
+      Name: <input type="text" name="name" value="<%=book.name%>">
+      Author: <input type="text" name="author" value="<%book.author">
+      Finished?:
+        <input type="checkbox" name="finished"
+          <% if (book.finished === true) { %>
+            checked
+          <% } %>
+        >
+        <br>
+      <input type="submit" value="Submit Change">
+    </form>
+  </body>
+</html>
