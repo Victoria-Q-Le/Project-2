@@ -1,8 +1,8 @@
 const mongoose = require ('mongoose')
 
 const bookSchema = new mongoose.Schema ({
-  name: {type:String, require: yes},
-  author: {type: String, require: yes},
+  name: {type:String, require: true},
+  author: {type: String, require: true},
   notes: String,
   finished: Boolean,
   bookmark: Number
