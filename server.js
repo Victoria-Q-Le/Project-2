@@ -54,6 +54,13 @@ app.get('/' , (req, res) => {
 });
 
 //___________________
+// New Route
+//___________________
+app.get('/books/new', (req,res) => {
+  res.render('new.ejs')
+})
+
+//___________________
 // Show Route
 //___________________
 app.get('/books/:id', (req,res) => {
@@ -62,13 +69,6 @@ app.get('/books/:id', (req,res) => {
       book: foundBook
     })
   })
-})
-
-//___________________
-// New Route
-//___________________
-app.get('/books/new', (req,res) => {
-  res.render('new.ejs')
 })
 
 //___________________
