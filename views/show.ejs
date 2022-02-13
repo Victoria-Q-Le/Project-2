@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+    <h1>Books Show Page</h1>
+    The <%= book.name %> is written by <%= book.author %>
+    <% if (book.finished === true) { %>
+      You have finished this book
+    <% } else { %>
+      You are at page <%= book.bookmark %>
+    <% } %>
+    <nav>
+      <a href="/books">Back to Books Index </a>
+    </nav>
+  </body>
+</html>

@@ -49,11 +49,20 @@ app.use(methodOverride('_method'));// allow POST, PUT and DELETE from a form
 // Routes
 //___________________
 //localhost:3000
-// app.get('/' , (req, res) => {
-//   res.send('Hello World!');
-// });
+app.get('/' , (req, res) => {
+  res.send('Hello World!');
+});
 
-
+//___________________
+// Show Route
+//___________________
+app.get('/books/:id', (req,res) => {
+  Book.findById(req.params.id, (err,foundBook) => {
+    res.render('show.ejs', {
+      book: foundBook
+    })
+  })
+})
 
 //___________________
 // New Route
