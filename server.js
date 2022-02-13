@@ -99,7 +99,7 @@ app.get('/books',(req,res) => {
 //___________________
 // Delete Route
 //___________________
-app.delete('/fruits/:id',(req,res) => {
+app.delete('/books/:id',(req,res) => {
   Book.findByIdAndRemove(req.params.id, (err,data) => {
     res.redirect('/books')
   })
@@ -108,7 +108,7 @@ app.delete('/fruits/:id',(req,res) => {
 //___________________
 // Edit Route
 //___________________
-app.get('/book/:id/edit', (req,res) => {
+app.get('/books/:id/edit', (req,res) => {
   Book.findById(req.params.id, (err,foundBook) => {
     res.render('edit.ejs', {
       book: foundBook
@@ -119,7 +119,7 @@ app.get('/book/:id/edit', (req,res) => {
 //___________________
 // Put Route
 //___________________
-app.put('/book/:id',(req,res) => {
+app.put('/books/:id',(req,res) => {
   if (req.body.finished === 'on'){
     req.body.finished === true
   } else {

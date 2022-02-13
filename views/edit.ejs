@@ -6,9 +6,9 @@
   </head>
   <body>
     <h1>Edit Book Page</h1>
-    <form action="/books/<%=book.id%>?_method=PUT" method = "POST">
+    <form action="/books/<%=book.id%>?_method=PUT" method="POST">
       Name: <input type="text" name="name" value="<%=book.name%>">
-      Author: <input type="text" name="author" value="<%book.author">
+      Author: <input type="text" name="author" value="<%book.author%>">
       Finished?:
         <input type="checkbox" name="finished"
           <% if (book.finished === true) { %>
