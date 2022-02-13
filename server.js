@@ -95,6 +95,15 @@ app.get('/books',(req,res) => {
     })
   })
 })
+
+//___________________
+// Delete Route
+//___________________
+app.delete('/fruits/:id',(req,res) => {
+  Book.findByIdAndRemove(req.params.id, (err,data) => {
+    res.redirect('/books')
+  })
+})
 //___________________
 //Listener
 //___________________
