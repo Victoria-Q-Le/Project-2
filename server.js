@@ -72,11 +72,20 @@ app.post('/books/',(req,res) => {
     req.body.finished = false
   }
   Book.create(req.body,(err,createdBook) => {
-    res.send(createdBook)
+    res.redirect('/books')
   })
 })
 
-
+//___________________
+// Index Route
+//___________________
+app.get('/books',(req,res) => {
+  Book.find({}, (err,allBooks) => {
+    res.render('index.ejs', {
+      books: allBooks
+    })
+  })
+})
 //___________________
 //Listener
 //___________________
