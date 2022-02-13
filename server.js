@@ -7,6 +7,7 @@ const mongoose = require ('mongoose');
 const app = express ();
 const db = mongoose.connection;
 require('dotenv').config()
+const Book = require ('.models/books.js')
 //___________________
 //Port
 //___________________
@@ -65,7 +66,14 @@ app.get('/books/new', (req,res) => {
 // Create Route
 //___________________
 app.post('/books/',(req,res) => {
-  res.send('req.body')
+  if ( req.body.finished === 'on'){
+    req.body.finished = true
+  } else {
+    req.body.finished = false
+  }
+  Book.create(req.body,(err,createdBook) => {
+    res.send(createdBook)
+  })
 })
 
 
