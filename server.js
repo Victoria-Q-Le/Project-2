@@ -8,6 +8,11 @@ const app = express ();
 const db = mongoose.connection;
 require('dotenv').config()
 const Book = require ('./models/books.js')
+const userController = require('./controllers/users_controller.js')
+const session = require('express-session')
+const sessionsController = require('./controllers/sessions_controller.js')
+
+
 //___________________
 //Port
 //___________________
@@ -34,6 +39,20 @@ db.on('disconnected', () => console.log('mongo disconnected'));
 //Middleware
 //___________________
 
+//use controllers folder for users_controllers route
+app.use('/users',userController);
+
+//use session
+app.use(
+  session({
+    secret: process.env.SECRET,
+    resave: false,
+    saveUninitialized: false
+  })
+)
+
+app.use('/sessions',sessionsController)
+
 //use public folder for static assets
 app.use(express.static('public'));
 
@@ -44,20 +63,32 @@ app.use(express.json());// returns middleware that only parses JSON - may or may
 //use method override
 app.use(methodOverride('_method'));// allow POST, PUT and DELETE from a form
 
+//only user can see certain page
+const isAuthenticated = (req,res,next) => {
+  if (req.session.currentUser) {
+    return next()
+  } else {
+    res.render('login.ejs')
+  }
+}
+
+
 
 //___________________
 // Routes
 //___________________
 //localhost:3000
 app.get('/' , (req, res) => {
-  res.send('Hello World!');
+  res.render('home.ejs');
 });
 
 //___________________
 // New Route
 //___________________
 app.get('/books/new', (req,res) => {
-  res.render('new.ejs')
+  res.render('new.ejs',{
+    currentUser: req.session.currentUser
+  })
 })
 
 //___________________
@@ -66,7 +97,8 @@ app.get('/books/new', (req,res) => {
 app.get('/books/:id', (req,res) => {
   Book.findById(req.params.id, (err,foundBook) => {
     res.render('show.ejs', {
-      book: foundBook
+      book: foundBook,
+      currentUser: req.session.currentUser
     })
   })
 })
@@ -91,7 +123,8 @@ app.post('/books/',(req,res) => {
 app.get('/books',(req,res) => {
   Book.find({}, (err,allBooks) => {
     res.render('index.ejs', {
-      books: allBooks
+      books: allBooks,
+      currentUser: req.session.currentUser
     })
   })
 })
@@ -99,7 +132,7 @@ app.get('/books',(req,res) => {
 //___________________
 // Delete Route
 //___________________
-app.delete('/books/:id',(req,res) => {
+app.delete('/books/:id',isAuthenticated, (req,res) => {
   Book.findByIdAndRemove(req.params.id, (err,data) => {
     res.redirect('/books')
   })
@@ -108,10 +141,11 @@ app.delete('/books/:id',(req,res) => {
 //___________________
 // Edit Route
 //___________________
-app.get('/books/:id/edit', (req,res) => {
+app.get('/books/:id/edit', isAuthenticated, (req,res) => {
   Book.findById(req.params.id, (err,foundBook) => {
     res.render('edit.ejs', {
-      book: foundBook
+      book: foundBook,
+      currentUser: req.session.currentUser
     })
   })
 })
@@ -119,7 +153,7 @@ app.get('/books/:id/edit', (req,res) => {
 //___________________
 // Put Route
 //___________________
-app.put('/books/:id',(req,res) => {
+app.put('/books/:id',isAuthenticated,(req,res) => {
   if (req.body.finished === 'on'){
     req.body.finished === true
   } else {
