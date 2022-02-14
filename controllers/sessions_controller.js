@@ -1,7 +1,12 @@
 const bcrypt = require ('bcrypt')
 const express = require('express')
+const bodyParser = require('body-parser')
 const sessions = express.Router()
 const User = require('../models/users.js')
+const app = express()
+const jsonParser = bodyParser.json()
+const urlencodedParser = bodyParser.urlencoded({extended:false})
+
 
 sessions.get('/new', (req,res) => {
   res.render('login.ejs',{
@@ -9,8 +14,8 @@ sessions.get('/new', (req,res) => {
   })
 })
 
-sessions.post('/',(req,res) => {
-  User.findOne({username: req.body.username}, (err, foundUser) => {
+sessions.post('/login',urlencodedParser, (req,res) => {
+  User.findOne({email: req.body.email}, (err, foundUser) => {
     if (err) {
       console.log(err)
       res.send('oops the db had a problem');
@@ -19,7 +24,7 @@ sessions.post('/',(req,res) => {
     } else {
       if (bcrypt.compareSync(req.body.password, foundUser.password)){
         req.session.currentUser = foundUser
-        res.redirect('/')
+        res.redirect('/books')
       } else {
         res.send('<a href="/"> password does not match </a>')
       }
@@ -27,7 +32,7 @@ sessions.post('/',(req,res) => {
   })
 })
 
-sessions.delete('/', (req,res) => {
+sessions.post('/logout', (req,res) => {
   req.session.destroy(() => {
     res.redirect('/')
   })
