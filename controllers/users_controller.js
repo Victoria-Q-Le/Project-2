@@ -4,7 +4,9 @@ const users = express.Router()
 const User = require ('../models/users.js')
 
 users.get('/new',(req,res) => {
-  res.render('new_user.ejs')
+  res.render('sign_up.ejs',{
+    tabTitle: 'Sign up page'
+  })
 })
 
 users.post('/',(req,res) => {
