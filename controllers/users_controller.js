@@ -11,7 +11,6 @@ const urlencodedParser = bodyParser.urlencoded({extended:false})
 
 users.get('/new',(req,res) => {
   res.render('users/sign_up.ejs', {
-    currentUser: req.session.currentUser
   })
 })
 
