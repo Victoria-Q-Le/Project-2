@@ -84,9 +84,10 @@ app.get('/' , (req, res) => {
 //___________________
 // New Route
 //___________________
-app.get('/books/new', (req,res) => {
+app.get('/books/new', isAuthenticated, (req,res) => {
   res.render('new.ejs',{
-    currentUser: req.session.currentUser
+    currentUser: req.session.currentUser,
+    tabTitle: 'Add New Book'
   })
 })
 
@@ -123,7 +124,8 @@ app.get('/books',(req,res) => {
   Book.find({}, (err,allBooks) => {
     res.render('index.ejs', {
       books: allBooks,
-      currentUser: req.session.currentUser
+      currentUser: req.session.currentUser,
+      tabTitle: 'Index Page'
     })
   })
 })

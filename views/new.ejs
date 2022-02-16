@@ -1,18 +1,72 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>
-    <meta charset="utf-8">
-    <title>This page is used to create new title</title>
+    <%- include ('partials/head.ejs') %>
   </head>
   <body>
-    <h1>New Book Page</h1>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <div class="container-fluid">
+        <div class="logo">
+          <a href="/books">Readmate.</a>
+          <i class="fa-solid fa-book"></i>
+        </div>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0 justify-content-end">
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="/books">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Hello <%=currentUser.name.toUpperCase()%></a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link active" href="/sessions/logout">Log out</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <div class="card">
+      <h1 class="card-header">New Book Info</h1>
+      <form class="card-body" action="/books" method="POST">
+        <div class="form-row card-title">
+          <div class="col">
+            <input class="form-contrl" type="text" name="name" placeholder="Book Name">
+          </div>
+          <div class="col">
+            <input class="form-control" type="text" name="author" placeholder="Author">
+          </div>
+          <div class="input-group card-text">
+            <div class="input-group-prepend">
+              <span class="input-group-text">Notes:</span>
+            </div>
+            <textarea class="form-control" aria-label="With textarea" name="notes"></textarea>
+          </div>
+          <div>
+            <label>Finished? <input type="checkbox" name="finished"> </label><br>
+          </div>
+          <div class="col">
+            <input class="form-control" type="text" name="img" placeholder="IMG URL">
+          </div>
+          <div class="submit">
+            <input class="btn btn-primary btn-lg btn-block" type="submit" value="Add Book">
+          </div>
+        </div>
+      </form>
+
+    </div>
+    <!-- <h1>New Book Page</h1>
     <form class="" action="/books" method="POST">
       Name: <input type="text" name="name"> <br>
       Author: <input type="text" name="author"> <br>
       Notes: <input type="text" name="notes"><br>
+      Img URL (if any): <input type="text" name="img"><br>
       Finished?: <input type="checkbox" name="finished"><br>
         Bookmarks: <input type="number" name="bookmark">
       <input type="submit" name="Add to Collection">
-    </form>
+    </form> -->
   </body>
 </html>

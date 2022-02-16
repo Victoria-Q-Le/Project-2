@@ -1,0 +1,47 @@
+body {
+  background-color: #E9E7DA;
+
+}
+
+.logo {
+  font-size: 30px;
+  color: #636B46;
+  text-decoration: none;
+}
+
+.logo a {
+  font-size: 30px;
+  color: #636B46;
+}
+
+.nav-item .nav-link  {
+  font-size: 20px;
+  color: #636B46;
+  margin-left: 40px;
+}
+
+#navbarTogglerDemo02 {
+  margin-left: 450px;
+}
+
+nav {
+  padding: 20px;
+}
+
+.index-container {
+  padding: 40px;
+}
+
+div.col {
+  margin-top: 20px;
+}
+
+div.d-grid {
+  padding: 10px;
+  margin-left: 200px;
+  display: flex;
+}
+
+.container {
+  padding: 40px;
+}

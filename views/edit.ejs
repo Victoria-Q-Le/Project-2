@@ -14,6 +14,7 @@
     <form action="/books/<%=book.id%>?_method=PUT" method="POST">
       Name: <input type="text" name="name" value="<%=book.name%>">
       Author: <input type="text" name="author" value="<%book.author%>">
+      Img URL: <input type="text" name="img">
       Finished?:
         <input type="checkbox" name="finished"
           <% if (book.finished === true) { %>

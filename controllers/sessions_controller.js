@@ -9,9 +9,7 @@ const urlencodedParser = bodyParser.urlencoded({extended:false})
 
 
 sessions.get('/new', (req,res) => {
-  res.render('login.ejs',{
-    currentUser: req.session.currentUser
-  })
+  res.render('login.ejs')
 })
 
 sessions.post('/login',urlencodedParser, (req,res) => {
@@ -32,7 +30,7 @@ sessions.post('/login',urlencodedParser, (req,res) => {
   })
 })
 
-sessions.post('/logout', (req,res) => {
+sessions.get('/logout', (req,res) => {
   req.session.destroy(() => {
     res.redirect('/')
   })

@@ -1,26 +1,69 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>
-    <meta charset="utf-8">
-    <title>Book Index</title>
+    <%- include('partials/head.ejs') %>
   </head>
   <body>
-    <h1>Books index page</h1>
-    <ul>
-      <% for (let i=0; i<books.length; i++) { %>
-        <li>
-          <a href="/books/<%=books[i].id%>">
-            <%= books[i].name %>
-          </a>
-          <form action="/books/<%=books[i].id%>?_method=DELETE" method="POST">
-            <input type="submit"  value="DELETE">
-          </form>
-          <a href="/books/<%=books[i].id; %>/edit">Edit</a>
-        </li>
-      <% } %>
-    </ul>
-    <nav>
-      <a href="/books/new"> Create a New Book </a>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <div class="container-fluid">
+        <div class="logo">
+          <a href="/books">Readmate.</a>
+          <i class="fa-solid fa-book"></i>
+        </div>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0 justify-content-end">
+            <li class="nav-item">
+              <a class="nav-link disabled" aria-current="page" href="#">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Hello <%=currentUser.name.toUpperCase()%></a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link active" href="/sessions/logout">Log out</a>
+            </li>
+          </ul>
+        </div>
+      </div>
     </nav>
+
+    <div class="container">
+    <div class="row row-cols-1 row-cols-md-3 g-4">
+      <% for (let i = 0; i < books.length; i++) { %>
+        <div class="col">
+          <div class="card h-100">
+            <img src="<%=books[i].img%>" class="card-img-top" alt="">
+            <div class="card-body">
+              <h5 class="card-title"> <%=books[i].name %> </h5>
+              <p class="card-text"> <%= books[i].author %> </p>
+              <% if (books[i].finished === true) { %>
+              <p class="card-text"><small class="text-muted"> You have finished this book </small> </p>
+              <% } else { %>
+              <p class="card-text"><small class="text-muted"> You have not finished this book </small> </p>
+              <% } %>
+            <form action="/books/<%=books[i].id%>?_method=DELETE" method="POST">
+              <input type="submit"  value="DELETE">
+            </form>
+            <a href="/books/<%=books[i].id; %>/edit">Edit</a>
+          </div>
+        </div>
+      </div>
+      <% } %>
+    </div>
+    <nav>
+      <a href="/books/new" class="btn btn-primary btn-lg btn-block"> Create a New Book </a>
+    </nav>
+    </div>
+
+    <!-- <nav class="d-grid">
+      <a href="/books/new" class="btn btn-primary btn-lg btn-block"> Create a New Book </a>
+    </nav> -->
+
+
+    <!-- <a href="/books/new"> Create a New Book </a> -->
+
+
   </body>
 </html>
