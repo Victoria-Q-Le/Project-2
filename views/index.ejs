@@ -36,7 +36,9 @@
           <div class="card h-100">
             <img src="<%=books[i].img%>" class="card-img-top" alt="">
             <div class="card-body">
-              <h5 class="card-title"> <%=books[i].name %> </h5>
+              <a href="/books/<%=books[i].id%>">
+                <h5 class="card-title"> <%=books[i].name %> </h5>
+              </a>
               <p class="card-text"> <%= books[i].author %> </p>
               <% if (books[i].finished === true) { %>
               <p class="card-text"><small class="text-muted"> You have finished this book </small> </p>
