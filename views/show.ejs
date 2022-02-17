@@ -1,19 +1,91 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>
-    <meta charset="utf-8">
-    <title></title>
+    <%- include('partials/head.ejs') %>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+      }
+      #map{
+        height: 400px;
+        width: 100%;
+      }
+    </style>
   </head>
   <body>
-    <h1>Books Show Page</h1>
-    The <%=book.name%> is written by <%=book.author%>
-    <% if (book.finished === true) { %>
-      You have finished this book
-    <% } else { %>
-      You are at page <%= book.bookmark %>
-    <% } %>
-    <nav>
-      <a href="/books">Back to Books Index </a>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <div class="container-fluid">
+        <div class="logo">
+          <a href="/books">Readmate.</a>
+          <i class="fa-solid fa-book"></i>
+        </div>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0 justify-content-end">
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="/books">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link disabled" href="#">Hello <%=currentUser.name.toUpperCase()%></a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link active" href="/sessions/logout">Log out</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <div class="card border-info mb-3" style="max-width: 90%;">
+      <h2 class="card-header"><%=book.name%></h2>
+        <div class="card-body">
+          <h5 class="card-title">Author:</h5>
+            <p class="card-text"><%=book.author%></p>
+      <br>
+          <h5 class="card-title">Notes:</h5>
+            <p class="card-text"><%=book.notes%></p>
+      <br>
+          <h5 class="card-title">Finished:</h5>
+            <p class="card-text"><%if(book.finished === true){%>
+              You have finished this book
+                <%}else {%>
+              You have not finished this book
+              <%}%>
+            </p>
+      </div>
+    </div>
+    <div class="mx-auto" style="width: 200px;">
+    <form action="/books/<%=book.id; %>?_method=DELETE" method="POST">
+      <a href="/books/<%=book.id; %>/edit" class="btn btn-primary btn-sm">Edit</a>
+      <input class="btn btn-danger btn-sm" type="submit" value="DELETE">
+    </form>
+    </div>
+
+    <div id="map"></div>
+
+    <script>
+      function initMap() {
+        var location = {lat: <%=book.lat%>, lng: <%=book.lng%>};
+        var map = new google.maps.Map(document.getElementById("map"),{
+          zoom: 4,
+          center: location
+        });
+        var marker = new google.maps.Marker({
+          position: location,
+          map: map
+        });
+      }
+
+    </script>
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBh_MlxLTev4bGkQrIYodhmOigWrOjrYqI&callback=initMap">
+
+    </script>
+
+    <nav >
+      <a class="btn btn-primary btn-lg btn-block" href="/books">Back to Books Index </a>
     </nav>
   </body>
 </html>

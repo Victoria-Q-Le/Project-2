@@ -14,11 +14,12 @@ users.get('/new',(req,res) => {
 })
 
 users.post('/createUser',urlencodedParser,(req,res) => {
-  req.body.password = bcrypt.hashSync(req.body.password, bcrypt.genSaltSync(10))
+  req.body.password = bcrypt.hashSync(req.body.password, bcrypt.genSaltSync(10));
+  console.log(req.body);
   User.create(req.body, (err,createdUser) => {
+    console.log(createdUser);
     res.redirect('/')
   })
-  console.log(req.body);
 })
 
 module.exports = users

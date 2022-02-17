@@ -94,11 +94,12 @@ app.get('/books/new', isAuthenticated, (req,res) => {
 //___________________
 // Show Route
 //___________________
-app.get('/books/:id', (req,res) => {
+app.get('/books/:id', isAuthenticated,(req,res) => {
   Book.findById(req.params.id, (err,foundBook) => {
     res.render('show.ejs', {
       book: foundBook,
-      currentUser: req.session.currentUser
+      currentUser: req.session.currentUser,
+      tabTitle: 'Book Info'
     })
   })
 })
@@ -146,7 +147,8 @@ app.get('/books/:id/edit', isAuthenticated, (req,res) => {
   Book.findById(req.params.id, (err,foundBook) => {
     res.render('edit.ejs', {
       book: foundBook,
-      currentUser: req.session.currentUser
+      currentUser: req.session.currentUser,
+      tabTitle: 'Edit Book'
     })
   })
 })

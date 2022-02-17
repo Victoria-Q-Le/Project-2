@@ -6,7 +6,9 @@ const bookSchema = new mongoose.Schema ({
   notes: String,
   img: String,
   finished: Boolean,
-  bookmark: Number
+  bookmark: Number,
+  lat:String,
+  lng:String
 })
 
 const bookCollection = mongoose.model('Book', bookSchema)
