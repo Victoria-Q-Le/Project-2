@@ -1,12 +1,12 @@
 //___________________
 //Dependencies
 //___________________
+require('dotenv').config()
 const express = require('express');
 const methodOverride  = require('method-override');
 const mongoose = require ('mongoose');
 const app = express ();
 const db = mongoose.connection;
-require('dotenv').config()
 const Book = require ('./models/books.js')
 const userController = require('./controllers/users_controller.js')
 const session = require('express-session')
@@ -99,7 +99,7 @@ app.get('/books/:id', isAuthenticated,(req,res) => {
     res.render('show.ejs', {
       book: foundBook,
       currentUser: req.session.currentUser,
-      tabTitle: 'Book Info'
+      tabTitle: 'Book Info',
     })
   })
 })
