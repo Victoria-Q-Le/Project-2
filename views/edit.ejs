@@ -29,7 +29,19 @@
       </div>
     </nav>
 
-
+    <!-- <h1>Edit Fruit Page</h1>
+        <form action="/books/<%=book.id%>?_method=PUT" method="POST">
+            Name: <input type="text" name="name" value="<%=book.name%>"/><br/>
+            Author: <input type="text" name="author" value="<%=book.author%>"/><br/>
+            Have you finished?:
+            <input type="checkbox" name="finished"
+                <% if(book.finished === true){ %>
+                    checked
+                <% } %>
+            />
+            <br/>
+            <input type="submit" name="" value="Submit Changes"/>
+        </form> -->
     <div class="card">
     <h1 class='card-header'>
       Edit <%=book.name%>

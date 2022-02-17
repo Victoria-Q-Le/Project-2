@@ -121,7 +121,7 @@ app.post('/books/',(req,res) => {
 //___________________
 // Index Route
 //___________________
-app.get('/books',(req,res) => {
+app.get('/books',isAuthenticated,(req,res) => {
   Book.find({}, (err,allBooks) => {
     res.render('index.ejs', {
       books: allBooks,
@@ -156,7 +156,7 @@ app.get('/books/:id/edit', isAuthenticated, (req,res) => {
 //___________________
 // Put Route
 //___________________
-app.put('/books/:id',isAuthenticated,(req,res) => {
+app.put('/books/:id',(req,res) => {
   if (req.body.finished === 'on'){
     req.body.finished === true
   } else {

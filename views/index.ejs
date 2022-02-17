@@ -45,12 +45,10 @@
               <% } else { %>
               <p class="card-text"><small class="text-muted"> You have not finished this book </small> </p>
               <% } %>
-            <form action="/books/<%=books[i].id%>?_method=DELETE" method="POST">
-              <button type="button" class="btn btn-danger">Delete</button>
-            </form>
-            <a href="/books/<%=books[i].id; %>/edit">
-              <button type="button" class="btn btn-success">Edit</button>
-            </a>
+              <form action="/books/<%=books[i].id; %>?_method=DELETE" method="POST">
+                    <a href="/books/<%=books[i].id; %>/edit" class="btn btn-primary btn-sm">Edit</a>
+                    <input class="btn btn-danger btn-sm" type="submit" value="DELETE">
+              </form>
           </div>
         </div>
       </div>

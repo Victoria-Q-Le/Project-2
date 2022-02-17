@@ -67,6 +67,8 @@
     <div id="map"></div>
 
     <script>
+      require('dotenv').config()
+      const MAPS_KEY = process.env.API_KEY_GOOGLE_MAPS
       function initMap() {
         var location = {lat: <%=book.lat%>, lng: <%=book.lng%>};
         var map = new google.maps.Map(document.getElementById("map"),{
@@ -80,7 +82,7 @@
       }
 
     </script>
-    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBh_MlxLTev4bGkQrIYodhmOigWrOjrYqI&callback=initMap">
+    <script async defer src=`https://maps.googleapis.com/maps/api/js?key=${MAPS_KEY}&callback=initMap`>
 
     </script>
 
