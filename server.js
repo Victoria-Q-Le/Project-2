@@ -158,9 +158,9 @@ app.get('/books/:id/edit', isAuthenticated, (req,res) => {
 //___________________
 app.put('/books/:id',(req,res) => {
   if (req.body.finished === 'on'){
-    req.body.finished === true
+    req.body.finished = true
   } else {
-    req.body.finished === false
+    req.body.finished = false
   }
   Book.findByIdAndUpdate (req.params.id, req.body, {new:true}, (err,updateModel) => {
     res.redirect('/books')
